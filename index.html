@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>
+			B&E's Homepage
+		</title>
+		<style>
+			#container {
+				width: 80vw;
+				margin: auto;
+				
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.link {
+				width: 15vw;
+				height: 15vw;
+				display: inline-block;
+			}
+
+			img {
+				width: 100%;
+				height: 100%;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container">
+		</div>
+		<script type="text/javascript">
+			
+			let container = document.getElementById('container');
+
+			class Site {
+				constructor(enName,name,url) {
+					this.image = `./logos/${name}.png`;
+					this.url = url;
+					this.name = enName;
+				}
+
+				makeElement() {
+					let e = document.createElement('a');
+					e.classList = ['link'];
+					e.href = this.url;
+
+					let image = document.createElement('img');
+					image.src = this.image;
+					e.appendChild(image);
+
+					return e;
+				}
+			};
+
+			let sites = [
+				new Site('Google','google','https://www.google.com/'),
+				new Site('Facebook','facebook','https://www.facebook.com/'),
+				new Site('YouTube','youtube','https://www.youtube.com/'),
+				new Site('YouTube','youtube','https://www.youtube.com/'),
+				new Site('YouTube','youtube','https://www.youtube.com/'),
+				new Site('YouTube','youtube','https://www.youtube.com/'),
+				new Site('YouTube','youtube','https://www.youtube.com/'),
+				new Site('YouTube','youtube','https://www.youtube.com/'),
+				new Site('YouTube','youtube','https://www.youtube.com/'),
+				new Site('YouTube','youtube','https://www.youtube.com/'),
+				new Site('YouTube','youtube','https://www.youtube.com/'),
+				new Site('YouTube','youtube','https://www.youtube.com/'),
+			];
+
+			sites.forEach((site,index)=>{
+				container.appendChild(site.makeElement());
+				if (index % 4 == 3) {
+					container.innerHTML += '<br>';
+				}
+			});
+
+
+		</script>
+	</body>
+</html>
