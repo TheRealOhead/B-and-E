@@ -11,7 +11,7 @@
 				width: 80vw;
 				margin: auto;
 				
-				display: flex;
+				display: table;
 				justify-content: center;
 				align-items: center;
 			}
@@ -25,6 +25,24 @@
 			img {
 				width: 100%;
 				height: 100%;
+				border-radius: 3vw;
+				background-color: rgba(0,0,0,.1);
+			}
+			img:hover {
+				background-color: rgba(255,255,255,.1);	
+			}
+
+			body {
+				background-color: #7dace8;
+			}
+
+			.tooltipStyle {
+				background-color: #072c5c;
+				font-size: 2.5vw;
+				border-radius: .25vw;
+				padding: .75vw;
+				color: white;
+				font-family: sans-serif;
 			}
 		</style>
 	</head>
@@ -46,6 +64,12 @@
 					let e = document.createElement('a');
 					e.classList = ['link'];
 					e.href = this.url;
+					e.addEventListener('mouseenter',()=>{
+						tooltip.innerHTML = `<div class="tooltipStyle">${this.name}</div>`;
+					});
+					e.addEventListener('mouseleave',()=>{
+						tooltip.innerHTML = '';
+					});
 
 					let image = document.createElement('img');
 					image.src = this.image;
@@ -58,23 +82,26 @@
 			let sites = [
 				new Site('Google','google','https://www.google.com/'),
 				new Site('Facebook','facebook','https://www.facebook.com/'),
-				new Site('YouTube','youtube','https://www.youtube.com/'),
-				new Site('YouTube','youtube','https://www.youtube.com/'),
-				new Site('YouTube','youtube','https://www.youtube.com/'),
-				new Site('YouTube','youtube','https://www.youtube.com/'),
-				new Site('YouTube','youtube','https://www.youtube.com/'),
-				new Site('YouTube','youtube','https://www.youtube.com/'),
-				new Site('YouTube','youtube','https://www.youtube.com/'),
-				new Site('YouTube','youtube','https://www.youtube.com/'),
-				new Site('YouTube','youtube','https://www.youtube.com/'),
-				new Site('YouTube','youtube','https://www.youtube.com/'),
+				new Site('YouTube','youtube','https://www.youtube.com/')
 			];
 
 			sites.forEach((site,index)=>{
 				container.appendChild(site.makeElement());
-				if (index % 4 == 3) {
-					container.innerHTML += '<br>';
-				}
+			});
+
+
+			let tooltip = document.createElement('div');
+			tooltip.style.position = 'fixed';
+			tooltip.id = 'tooltip';
+			document.body.appendChild(tooltip);
+			document.addEventListener('mousemove',(e)=>{
+
+				let x = e.clientX;
+				let y = e.clientY;
+
+				tooltip.style.left = `${x+10}px`;
+				tooltip.style.top  = `${y+10}px`;
+
 			});
 
 
